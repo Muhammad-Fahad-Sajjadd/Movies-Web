@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import AuthService from '../../services/auth-service';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
-// import { useHistory } from 'react-router-dom';
 
 const UserLogin = () => {
-  // const history = useHistory();
+  const navigate = useNavigate(); // Get the navigate function
   const [credentials, setCredentials] = useState({
     email: '',
     password: '',
@@ -25,12 +24,10 @@ const UserLogin = () => {
     e.preventDefault();
     try {
       const result = await AuthService.login(credentials);
-      console.log(result)
       if (result.status === 1) {
-        console.log('In here')
         localStorage.setItem('currentUser', JSON.stringify(result.data));
         toast.success('Login successful');
-        // history.push('/movies');
+        navigate('/movies'); // Redirect to the movies route
       } else {
         toast.error(result.message);
       }

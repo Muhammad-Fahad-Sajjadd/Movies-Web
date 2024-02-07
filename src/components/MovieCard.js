@@ -1,4 +1,5 @@
 import React from 'react';
+import Poster from "../../src/assets/poster.png";
 
 const MovieCard = ({ movie, onFeedbackClick }) => {
   const { title, backdrop_path, ratings, genre_names } = movie;
@@ -8,7 +9,7 @@ const MovieCard = ({ movie, onFeedbackClick }) => {
 
   return (
     <div className="bg-white p-6 rounded-md shadow-md transition-transform transform hover:scale-105 relative">
-      <img src={backdrop_path} alt={title} className="w-full h-40 object-cover mb-4 rounded-md" />
+      <img src={Poster} alt={Poster} className="w-full h-40 object-cover mb-4 rounded-md" />
       <div className="flex flex-col justify-between h-full">
         <div className="mb-4">
           <h3 className="text-lg font-semibold mb-2">{title}</h3>
