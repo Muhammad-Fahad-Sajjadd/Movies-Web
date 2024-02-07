@@ -17,11 +17,9 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          {/* Public routes accessible to all users */}
           <Route index element={<UserLogin />} />
           <Route path="/login" element={<UserLogin />} />
           <Route path="/signup" element={<UserSignUp />} />
-          {/* Protected routes accessible only to logged-in users */}
           {isLoggedIn ? (
             <>
               <Route path="/movies" element={<MoviesScreen />} />
@@ -29,7 +27,6 @@ const App = () => {
               <Route path="/recommendedMovies" element={<RecommendedMoviesScreen />} />
             </>
           ) : (
-            // Redirect to login page if not logged in
             <Navigate to="/login" />
           )}
         </Route>

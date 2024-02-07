@@ -4,7 +4,6 @@ const baseUrl = 'http://localhost:3000';
 
 const MovieService = {
   getAllMovies: async (token) => {
-    console.log('SERVICE TOKEN', token);
     try {
       const response = await axios.get(`${baseUrl}/movies-controller/getAllmovies`, {
         headers: {

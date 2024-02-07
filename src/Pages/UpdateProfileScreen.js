@@ -54,7 +54,7 @@ const UpdateProfileScreen = () => {
       formDataToSend.append('address', formData.address);
       formDataToSend.append('dob', formData.dob);
       formData.genres.forEach(genre => formDataToSend.append('genres', genre));
-      formDataToSend.append('image', formData.image); // Make sure formData.image is not null
+      formDataToSend.append('image', formData.image);
       console.log('form Data screen',formData)
   
       const response = await UserService.updateUserProfile(formDataToSend, token);
@@ -81,7 +81,7 @@ const UpdateProfileScreen = () => {
     <div className="flex">
       <SideNav links={sideNavLinks} />
 
-      <div className="flex-1 ml-64"> {/* Adjust margin to match your side nav width */}
+      <div className="flex-1 ml-64">
         <div className="container mx-auto py-20">
           <div className="max-w-md mx-auto bg-white p-6 rounded-md shadow-md">
             <h2 className="text-3xl font-semibold mb-4 text-center">Update User Profile</h2>

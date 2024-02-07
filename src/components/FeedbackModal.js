@@ -24,7 +24,7 @@ const modalStyles = {
   },
 };
 
-const FeedbackModal = ({ movie, onClose }) => {
+const FeedbackModal = ({ movie, id, onClose }) => {
   const [rating, setRating] = useState(1);
 
   const handleRatingChange = (e) => {
@@ -40,8 +40,7 @@ const FeedbackModal = ({ movie, onClose }) => {
         return;
       }
 
-      const response = await UserService.giveMovieRating(token, movie._id, rating);
-      console.log('RES',response)
+      const response = await UserService.giveMovieRating(token, id, rating);
       if (response.status === 1) {
         console.log('Feedback submitted successfully');
         toast.success('Rating submitted successfully');
@@ -57,12 +56,12 @@ const FeedbackModal = ({ movie, onClose }) => {
 
   return (
     <Modal
-      isOpen={true} // You would use state to control modal visibility
+      isOpen={true}
       onRequestClose={onClose}
       contentLabel="Feedback Modal"
       style={modalStyles}
     >
-      <h2 className="text-3xl font-semibold mb-4 text-center">{`Give Feedback for ${movie.name}`}</h2>
+      <h2 className="text-3xl font-semibold mb-4 text-center">{`Give Feedback for ${movie}`}</h2>
       <label className="block mb-4 text-center">
         Rating:
         <select value={rating} onChange={handleRatingChange} className="ml-2 px-2 py-1 border rounded-md">

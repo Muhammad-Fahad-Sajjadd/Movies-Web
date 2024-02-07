@@ -10,6 +10,7 @@ const MoviesScreen = () => {
   const [activeLink, setActiveLink] = useState('allMovies');
   const [isFeedbackModalOpen, setFeedbackModalOpen] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [selectedMovieId, setSelectedMovieId] = useState('');
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -20,9 +21,7 @@ const MoviesScreen = () => {
           toast.error('Authorization token not found. Please log in again.');
           return;
         }
-        console.log('token',token)
         const response = await MovieService.getAllMovies(token);
-        console.log('RES',response)
         if(response.status===1){
           toast.success('Movies Fetched Successfully');
           setMovies(response.data);
@@ -38,13 +37,20 @@ const MoviesScreen = () => {
     fetchMovies();
   }, []);
 
-  const openFeedbackModal = (movie) => {
-    setSelectedMovie(movie);
-    setFeedbackModalOpen(true);
+  const openFeedbackModal = (movieId) => {
+    const selectedMovie = movies.find(movie => movie._id === movieId);
+    if (selectedMovie) {
+      setSelectedMovie(selectedMovie.title);
+      setSelectedMovieId(movieId);
+      setFeedbackModalOpen(true);
+    } else {
+      console.error('Movie not found');
+    }
   };
 
   const closeFeedbackModal = () => {
     setSelectedMovie(null);
+    setSelectedMovieId('');
     setFeedbackModalOpen(false);
   };
 
@@ -52,13 +58,12 @@ const MoviesScreen = () => {
     <div className="flex">
       <SideNav setActiveLink={setActiveLink} />
 
-      <div className="flex-1 ml-64"> {/* Adjust margin to match your side nav width */}
+      <div className="flex-1 ml-64">
         <div className="container mx-auto py-8 px-4">
           <h2 className="text-3xl font-semibold mb-4">Movies</h2>
-          {/* Display content based on the active link */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {movies.map((movie) => (
-              <MovieCard key={movie._id} movie={movie} onFeedbackClick={() => openFeedbackModal(movie)} />
+              <MovieCard key={movie._id} movie={movie} onFeedbackClick={() => openFeedbackModal(movie._id)} />
             ))}
           </div>
 
@@ -69,9 +74,10 @@ const MoviesScreen = () => {
             <p className="mb-4">Display Update Profile</p>
           )}
 
-          {isFeedbackModalOpen && (
+          {isFeedbackModalOpen && selectedMovie && (
             <FeedbackModal
               movie={selectedMovie}
+              id={selectedMovieId}
               onClose={closeFeedbackModal}
             />
           )}

@@ -2,9 +2,8 @@ import React from 'react';
 import Poster from "../../src/assets/poster.png";
 
 const MovieCard = ({ movie, onFeedbackClick }) => {
-  const { title, backdrop_path, ratings, genre_names } = movie;
+  const { title, ratings, genre_names } = movie;
 
-  // Calculate the average rating
   const averageRating = ratings.reduce((acc, cur) => acc + cur, 0) / ratings.length;
 
   return (

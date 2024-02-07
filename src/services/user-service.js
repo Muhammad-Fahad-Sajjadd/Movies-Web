@@ -17,7 +17,6 @@ const UserService = {
         }
     },
     updateUserProfile: async (formData, token) => {
-        console.log('Form data', formData)
         try {
             const response = await axios.put(`${baseUrl}/user-controller/updateUserProfile`, formData, {
                 headers: {
