@@ -9,9 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
-  // Check if the user is logged in
   const isLoggedIn = localStorage.getItem('currentUser');
-  console.log('Is Logged In',isLoggedIn);
 
   return (
     <BrowserRouter>
