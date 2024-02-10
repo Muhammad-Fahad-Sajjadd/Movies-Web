@@ -25,7 +25,7 @@ const App = () => {
               <Route path="/recommendedMovies" element={<RecommendedMoviesScreen />} />
             </>
           ) : (
-            <Navigate to="/login" />
+            <Route element={<Navigate to="/login" />} />
           )}
         </Route>
       </Routes>
